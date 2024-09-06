@@ -144,3 +144,16 @@ let rec op_prod n p f op neutral =
     then neutral
   else
     (op) (f n) (op_prod (n+1) p f op neutral);;   
+
+
+
+
+let convolution f g = 
+  let rec aux_conv k n =
+    if (n = 0) 
+      then 0
+    else
+      (f k) * (g n) + (aux_conv (k+1)(n-1))
+    in aux_conv 0;;  
+
+    
