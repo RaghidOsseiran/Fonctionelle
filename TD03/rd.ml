@@ -13,9 +13,9 @@ let fibo n = fst (fibo_aux n);;
 
 (* Exo 3.6 *)
 
-type couleur = Pique | Coeur | Carreau | Trefle;;
+(* type couleur = Pique | Coeur | Carreau | Trefle;; *)
 
-type carte =
+(* type carte =
 As of couleur
 | Roi of couleur
 | Dame of couleur
@@ -32,7 +32,7 @@ let est_de_couleur crt col = (couleur_carte crt == col);;
 let est_figure crt = 
   match crt with 
   | Dame(_) | Roi(_) | Valet(_) -> true 
-  | _ -> false
+  | _ -> false *)
 
 
 (* EXO 3.7 *)
@@ -104,3 +104,34 @@ let rec derive (var : expr) expr =
 let rec derivee_n var expr n =
   if n = 0 then expr
   else derivee_n var (derive var expr) (n - 1)
+
+
+
+(* Moodle *)
+
+type region = Medoc | Graves | Alsace | Beaujolais | Touraine | Bourgogne 
+type couleur = Blanc | Rouge | Rose
+type vin = region * couleur * int
+
+
+let region_of (vine :vin) = 
+  match vine with 
+  | (r, _, _) -> r;;
+
+let color_of (vine :vin) = 
+  match vine with 
+  | (_, c, _) -> c;;
+
+let year_of (vine :vin) = 
+  match vine with 
+  | (_, _, y) -> y;;
+  
+
+let bordeaux_p vine = 
+  let region_v = region_of vine in (region_v = Medoc || region_v = Graves);;
+
+let has_color_p vine color =
+  let color_v = color_of vine in (color_v = color);;
+
+let after_year_p vine year = 
+  let year_v = year_of vine in (year_v >= year);;
