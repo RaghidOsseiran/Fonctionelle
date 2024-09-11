@@ -2,6 +2,33 @@ Translation d'un vecteur:
 
 z' = z + v = x + iy + a + ib = x + a + i(y + b)
 
+Transforme d'un point d'affixe z par la rotation de centre O(origin) et
+d'angle 0:
+
+z' = z * e^i0 = z * (cos0 + isin0)
+
+Transforme d'un point d'affixe z par la rotation de centre C d'affixe zc et
+d'angle 0:
+
+La formule dit, soit:
+
+R une rotation telle que:
+
+z(OMEGA) = a' + ib', angle 0 = x
+
+
+alors l'image de A zA= a + ib par la rotation R est B telle que:
+
+zB - z(OMEGA) = e^i0 * (zA - z(OMEGA))
+
+zB = e^i0 * (zA - z(OMEGA)) + z(OMEGA)
+
+Ce qu'on fait donc c'est on fait la difference entre notre coordonnees 
+actuelle par rapport au centre, puis on multiple par e^i0 = cos0 * isin0
+pour effectuer la rotation, puis on r'ajoute la difference pour revenir 
+dans le plan d'origin 
+
+
 Rotation d'angle θ:
 
 z' = e^iθ * z
