@@ -1,3 +1,4 @@
+
 type mycomplex = C of float * float
 
 let make_complex x y = C(x,y)
@@ -24,8 +25,6 @@ let c_mul c1 c2 =
   let r1, i1 = realpart c1, imagpart c1 in
   let r2, i2 = realpart c2, imagpart c2 in
   make_complex (r1 *. r2 -. i1 *. i2) (r1 *. i2 +. i1 *. r2)
-  (*On fait cela pour la multiplaction car partie reel donc beinsure r1*r2 et le - car i^2 = -1 et donc xi * yi = -xy, et le
-   rest c'est tout les coefficient avec un i*)
 let c_abs c = 
   sqrt ((realpart c) ** 2. +. (imagpart c) ** 2.) 
 let c_sca lambda c = make_complex (lambda *. realpart c)(lambda *. imagpart c)

@@ -86,7 +86,7 @@ let vx = Var("x");;
 let vy = Var("y");;
 
 let e1 = Plus(Mult(Number(2.0), vx), Number(1.0));;
-let e2 = Plus(Mult(Number(3.0), Mult(vx, vx)), Plus(Mult(Number(2.0), vx), Number(1.0)));;
+let e2 = Plus (Mult (Number 3., Mult (vx, vx)),Plus (Mult (Number 2., vx), Number 1.))
 
 let get_val v = 
   match v with 
@@ -97,7 +97,7 @@ let rec derive (var : expr) expr =
   | Var x -> if x = get_val vx then Number 1.0 else Number 0.0
   | Number _ -> Number 0.0
   | Plus (e1, e2) -> Plus (derive var e1, derive var e2)
-  | Mult (e1, e2) -> Plus (Mult (derive var e1, e2), Mult (e1, derive var e2))
+  | Mult (e1, e2) -> Plus (Mult(e1, derive var e2), Mult(derive var e1, e2))
   | Exp e -> Mult (derive var e, Exp e);;
 
 
