@@ -131,7 +131,7 @@ let rotate_zone zone angle center = fun p ->
   let rotation_factor = make_point cos_theta sin_theta in 
   let translated_p = c_dif p center in 
   let rotated_p = c_mul rotation_factor translated_p in 
-  let final_p = c_sum translated_p center in 
+  let final_p = c_sum rotated_p center in 
   point_in_zone_p final_p zone
 (* 
 let rotate_zone zone angle center = 
