@@ -156,4 +156,34 @@ let convolution f g =
       (f k) * (g n) + (aux_conv (k+1)(n-1))
     in aux_conv 0;;  
 
-    
+
+type matrice = M of int * int * int * int;;
+
+let get_fst_matrice (m:matrice) = 
+  match m with 
+  | M(x, _, _, _) -> x;;
+
+
+(* M(fibo(n), fibo(n-1), fibo(n-1), fibo(n-2))  *)
+
+
+(* on suppose qu'on a deux matrice carre avec un meme n *)
+let mult_matrice (m1: matrice) (m2:matrice) = 
+  match m1, m2 with 
+  | M(x1, x2, x3, x4), M(x1', x2', x3', x4') ->
+    M(x1*x1' + x2*x3', x1*x2'+x2*x4', x3*x1'+x4*x3', x3*x2'+x4*x4')
+
+
+
+let rec pow_log_matrice m n = 
+  if (n <= 0) 
+    then 
+      M(1, 0, 0, 1) (*Matrice d'identite, equivalent a 1 pour le cas de puissance *)
+  else
+    let y = pow_log_matrice m (n/2) in if (n mod 2 == 0) then mult_matrice y y else mult_matrice m (mult_matrice y y);;
+
+
+
+
+let fibo_log n = 
+  get_fst_matrice(pow_log_matrice (M(1,1,1,0)) (n-1));;
