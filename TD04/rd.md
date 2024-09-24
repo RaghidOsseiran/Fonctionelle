@@ -69,3 +69,18 @@ Etape:
 Cercle trigo:
 
 ![alt text](image-2.png)
+
+
+
+
+Exerice 4.3)
+
+
+A -u-> B, A se tranforme en B par la translation du vecteur u.
+
+affixe = forme complex
+
+on cherche donc l'affixe du point obtenue par la translation, donc l'affixe de B (ZB)
+
+
+On sait que AB = u , donc ZAB = Zu , donc ZB - ZA = Zu , donc ZB = ZA + Zu.

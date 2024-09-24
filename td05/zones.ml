@@ -115,23 +115,19 @@ let _ = point_in_zone_p (make_point 6.0 0.5) (scale_zone0 (make_disk 1. (make_po
 
 (* let rotate_zone0 zone angle = *)
 
-let rotate_zone0 zone angle = fun p -> 
-  let cos_theta = cos angle and sin_theta = sin angle in
-  let rotation_factor = make_point cos_theta sin_theta in 
-  let rotated_p = c_mul rotation_factor p in
+let rotate_zone0 (zone: zone) angle = fun p -> 
+  let rotated_p = rotate0 p angle in 
   point_in_zone_p rotated_p zone
 
 
 (* point_in_zone_p (make_point 0.5 8.) (rotate_zone0 (make_rectangle 10. 2.) (3.1416 /. 2.)) *)
 
 (* let rotate_zone zone angle center = *)
+(* test: view_zone (rotate_zone (make_rectangle 10. 10.) (3.1416 /. 2.) (make_point 10. 10.));; *)
 
-let rotate_zone zone angle center = fun p -> 
-  let cos_theta = cos angle and sin_theta = sin angle in
-  let rotation_factor = make_point cos_theta sin_theta in 
-  let translated_p = c_dif p center in 
-  let rotated_p = c_mul rotation_factor translated_p in 
-  let final_p = c_sum rotated_p center in 
+
+let rotate_zone (zone : zone) angle center = fun p -> 
+  let final_p = rotate p angle center in
   point_in_zone_p final_p zone
 (* 
 let rotate_zone zone angle center = 
