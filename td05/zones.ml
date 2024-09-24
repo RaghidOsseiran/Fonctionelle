@@ -133,3 +133,7 @@ let rotate_zone zone angle center = fun p ->
   let rotated_p = c_mul rotation_factor translated_p in 
   let final_p = c_sum translated_p center in 
   point_in_zone_p final_p zone
+(* 
+let rotate_zone zone angle center = 
+  fun (p: point) -> 
+    point_in_zone_p p () *)
