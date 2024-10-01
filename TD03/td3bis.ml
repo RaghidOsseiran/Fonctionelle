@@ -22,6 +22,9 @@ let couple_sum c1 = couple_fst c1 + couple_snd c1
 let pair_of_couple c = (couple_fst c, couple_snd c)
 
 
+
+(* let test = assert((couple_add (make_couple 1 2) (make_couple 1 2)) = make_couple 2 4) *)
+
 type couple = bool -> int
 
 let make_couple x y = fun b -> if b then x else y
@@ -43,3 +46,9 @@ let couple_sum c1 = couple_fst c1 + couple_snd c1
 
 
 let pair_of_couple c = (couple_fst c, couple_snd c)
+
+let compare_couple c1 c2 = (couple_fst c1 = couple_fst c2 && couple_snd c1 = couple_snd c2);;
+let test = assert(compare_couple((couple_add (make_couple 1 2) (make_couple 1 2))) (make_couple 2 4))
+
+
+(* let test = assert((couple_add (make_couple 1 2) (make_couple 1 2)) = make_couple 2 4) *)

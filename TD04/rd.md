@@ -1,20 +1,18 @@
-Translation d'un vecteur:
+# Translation d'un vecteur:
 
-z' = z + v = x + iy + a + ib = x + a + i(y + b)
+* z' = z + v = x + iy + a + ib = x + a + i(y + b)
 
-Transforme d'un point d'affixe z par la rotation de centre O(origin) et
-d'angle 0:
+# Transforme d'un point d'affixe z par la rotation de centre O(origin) et d'angle 0:
 
-z' = z * e^i0 = z * (cos0 + isin0)
+* z' = z * e^i0 = z * (cos0 + isin0)
 
-Transforme d'un point d'affixe z par la rotation de centre C d'affixe zc et
-d'angle 0:
+# Transforme d'un point d'affixe z par la rotation de centre C d'affixe zc et d'angle 0:
 
 La formule dit, soit:
 
 R une rotation telle que:
 
-z(OMEGA) = a' + ib', angle 0 = x
+z(OMEGA) = a' + ib', angle 0 = x, avec z(OMEGA) l'affixe du centre C.
 
 
 alors l'image de A zA= a + ib par la rotation R est B telle que:
@@ -32,6 +30,15 @@ dans le plan d'origin
 Rotation d'angle θ:
 
 z' = e^iθ * z
+
+# L'exponentielle complexe
+
+
+* exp(x + iy) = 
+
+-> exp(iy) = cos(y) * i sin(y)
+
+-> exp(x + iy) = exp(x) * (cos (y) + i sin(y))
 
 
 

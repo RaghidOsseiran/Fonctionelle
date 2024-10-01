@@ -42,11 +42,15 @@ let rotate0 c angle =
   c_mul c rotation_factor
 
 
-let rotate c angle center = 
+(* let rotate c angle center = 
   let translated_c = c_dif c center in 
   let rotated_c = rotate0 translated_c angle in 
-  c_sum rotated_c center
+  c_sum rotated_c center *)
 
+  let rotate c angle center = 
+    let translated_c = c_dif c center in 
+    let rotated_c = rotate0 translated_c angle in 
+    c_sum rotated_c center
 
   let test_mycomplex () =
     begin

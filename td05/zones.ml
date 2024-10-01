@@ -12,6 +12,7 @@ open Mycomplex
 (* A point in a 2-dimensional space is represented by a complex of type mycomplex *)
 type zone = mycomplex -> bool
 
+type point = mycomplex
 
 let make_point x y = make_complex x y
 
@@ -115,9 +116,7 @@ let _ = point_in_zone_p (make_point 6.0 0.5) (scale_zone0 (make_disk 1. (make_po
 
 (* let rotate_zone0 zone angle = *)
 
-let rotate_zone0 (zone: zone) angle = fun p -> 
-  let rotated_p = rotate0 p (-.angle) in 
-  point_in_zone_p rotated_p zone
+let rotate_zone0 (zone: zone) (angle:float): zone = fun p -> zone (rotate0 p (-.angle)) 
 
 
 (* point_in_zone_p (make_point 0.5 8.) (rotate_zone0 (make_rectangle 10. 2.) (3.1416 /. 2.)) *)
@@ -128,9 +127,15 @@ let rotate_zone0 (zone: zone) angle = fun p ->
 
 (*view_zone (rotate_zone (make_rectangle 10. 5.) (3.1416 /. 2.) (make_point 10. 10.));;*)
 
-let rotate_zone zone  angle center = fun p -> 
-  let final_p = rotate p (-.angle) center in
-  point_in_zone_p final_p zone
+let rotate_zone (zone:zone) (angle:float) (point:point) : zone = 
+  let z1 = translate_zone zone (c_dif c_origin point) in 
+  let z2 = rotate_zone0 z1 (angle) in 
+  translate_zone z2 point;;
+
+let rect = make_rectangle 5. 5. 
+let _ = rect (make_point 10. 10.)
+
+
 (* 
 let rotate_zone zone angle center = 
   fun (p: point) -> 
