@@ -51,12 +51,37 @@ let interval_list n p =
     else C(n, aux_interval (n+1) p)
   in aux_interval n p
 
-let rec reverse_list l =
+
+let test_reverse = C(1, C(2, C(3, Nil)));;
+
+let rec reverse_list l  =
   let rec aux_rev l acc = 
     match l with 
     | Nil -> acc 
     | C(x, t) -> aux_rev t (C(x, acc))
   in aux_rev l Nil
+
+
+let rec mylist_length_term l = 
+  let rec aux_term l acc = 
+    match l with 
+    | Nil -> acc 
+    | C(_, t) -> aux_term t (acc + 1)
+  in aux_term l 0;;  
+  
+(*
+
+difference between terminal and non terminal recursive calls:
+
+Terminal : last operation is the return of the recursive call (so non contruction or operation after receiving
+a value). This is done using an auxaliary function and a accumulator.
+
+Non-terminal : we can do operation with the result received from a previous recursive call 
+
+
+
+*)
+
 
 
 let interval_list_terminal n p = 

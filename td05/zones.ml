@@ -93,10 +93,10 @@ let test_make_disk () = fun _ ->
 (* Scale a zone in two dimensions *)
 (* let scale_zone0 zone coeff = *)
 
-let scale_zone0 zone coeff = fun p -> point_in_zone_p (c_mul coeff p) zone
+let scale_zone0 (zone:zone) coeff = fun p -> point_in_zone_p (c_sca coeff p) zone
   
 (* Test scale_zone *)
-let test = point_in_zone_p (make_point 5. 5.) (scale_zone0 (make_disk0 100.) (make_point 10. 10.)) 
+let test = point_in_zone_p (make_point 5. 5.) (scale_zone0 (make_disk0 100.) 10.) 
 
 (*=> On doit bien se rapelle que zone: point -> bool, et que la fonction point_in_zone_p prend un point, une zone, et apelle
  la fonction de type zone a ce point, et donc dans notre cas scale_zone0 renvoie une fonction de type zone qui une fois apeller
@@ -106,7 +106,7 @@ let test = point_in_zone_p (make_point 5. 5.) (scale_zone0 (make_disk0 100.) (ma
 
 let scale_zone zone coeff origin = fun p -> 
   let translated_p = c_dif p origin in 
-  point_in_zone_p (c_mul coeff translated_p) zone
+  point_in_zone_p (c_sca coeff translated_p) zone
 
 (*  
 let _ = point_in_zone_p (make_point 6.0 0.5) (scale_zone0 (make_disk 1. (make_point 4.0 4.0)) (make_point 6.0 4.0))

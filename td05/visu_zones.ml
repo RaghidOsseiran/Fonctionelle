@@ -19,6 +19,8 @@ open Zones
 open Images
 open Graphics
 
+type zone = mycomplex -> bool
+
 let nb_pixels_per_unit = 5
 
 let int_to_nb_pixels n = nb_pixels_per_unit * n
@@ -52,16 +54,16 @@ let random_signed_float z = random_sign () *. Random.float z
 
 let random_point z = make_point (random_signed_float z) (random_signed_float z)
 
-(*
-let gruyere n =
+
+(* let gruyere n =
   let radius = 40. in
   let zone = ref (make_disk0 radius)
   and disk = make_disk0 (radius /. 20.) in
   for i = 0 to n do
     zone := zone_difference !zone (translate_zone disk (random_point radius))
   done;
-  !zone
-*)
+  !zone *)
+
 
 let uname () =
   let (inchannel, outchannel) = Unix.open_process "uname" in
