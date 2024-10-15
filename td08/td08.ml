@@ -28,13 +28,15 @@ let reverse_list l =
   in aux_rev l [];;
 
 
+(* Notre code doit etre dynamique, on essaiye de jamais utiliser en dur le nom d'un type par example C ou Photo,
+et on passe donc que par des getter comme ca si on change Photo apres sa marchera toujour *)
 
 let select_by_subject (subject: subject) (album: album) : album = 
   let rec aux_select_by_subject subject album acc = 
     match album with
     | [] -> acc 
-    | Photo(_, _) as curr_photo :: tail -> 
-        if (has_subject subject curr_photo) then aux_select_by_subject subject tail (curr_photo::acc)
+    | curr_photo :: tail -> 
+        if has_subject subject curr_photo then aux_select_by_subject subject tail (curr_photo::acc)
         else aux_select_by_subject subject tail acc
   in reverse_list(aux_select_by_subject subject album []);;
 
@@ -43,8 +45,9 @@ let select_by_date p a =
   let rec aux_select_by_date p a acc = 
     match a with 
     | [] -> acc 
-    | Photo(year, _) as curr_photo :: tail -> 
-        if (p year) then aux_select_by_date p tail (curr_photo :: acc) else aux_select_by_date p tail acc 
+    | curr_photo :: tail -> 
+        let year = photo_annee curr_photo in 
+        if p year then aux_select_by_date p tail (curr_photo :: acc) else aux_select_by_date p tail acc 
   in reverse_list(aux_select_by_date p a []);; 
 
 
