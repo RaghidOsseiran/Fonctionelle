@@ -92,3 +92,73 @@ let fun_list_of_list (list : 'a list) : ('a fun_list) =
 
 let truncate (list : 'a fun_list) n = 
   fun x -> if (x >= n) then None else list x;;
+
+
+type ('k,'v) abr = Empty | Node of ('k,'v) abr * 'k * 'v * ('k,'v) abr;;
+type comparison = Lt | Eq | Gt;;
+
+type ('k, 'v) dict = {
+  cmp: 'k -> 'k -> comparison; 
+  tree: ('k, 'v) abr;
+};;
+
+let empty_dict cmp_func = {cmp = cmp_func ; tree = Empty};;
+
+let find k dict = 
+  let rec find_aux cmp curr_tree = 
+    match curr_tree with 
+    | Empty -> None
+    | Node (left, key, value, right) -> 
+        match (cmp k key) with
+        | Lt -> find_aux cmp left
+        | Eq -> Some value
+        | Gt -> find_aux cmp right
+  in find_aux dict.cmp dict.tree;;
+
+
+let add k v dict = 
+  let rec add_aux cmp curr_tree = 
+    match curr_tree with
+    | Empty -> Node(Empty, k, v, Empty)
+    | Node(left, key, value, right) -> 
+        match (cmp k key) with
+        | Lt -> Node(add_aux cmp left, key, value, right)
+        | Eq -> Node(left, key, v, right)
+        | Gt -> Node(left, key, value, add_aux cmp right)
+  in let new_tree = add_aux dict.cmp dict.tree in {cmp = dict.cmp ; tree = new_tree };;
+
+type comparison = Lt | Eq | Gt
+
+type ('k, 'v) abr =
+  | Empty
+  | Node of ('k, 'v) abr * 'k * 'v * ('k, 'v) abr
+
+type ('k, 'v) dict = {
+  cmp: 'k -> 'k -> comparison;
+  tree: ('k, 'v) abr;
+}
+
+(* Helper function to find the minimum valued node and its parent *)
+let rec min_value_node_and_parent parent = function
+  | Empty -> failwith "Should not happen"  (* This should not be called with Empty *)
+  | Node (Empty, k, v, _) -> (parent, k, v)
+  | Node (left, k, _, _) -> min_value_node_and_parent (Some k) left
+
+(* Recursive function to remove a node *)
+let rec remove_aux cmp k = function
+  | Empty -> failwith "Should not happen"  (* Key not found *)
+  | Node (left, key, value, right) as node ->
+      match cmp k key with
+      | Eq -> (match (left, right) with
+          | (Empty, Empty) -> Empty  (* No children *)
+          | (left, Empty) -> left    (* One child, on the left *)
+          | (Empty, right) -> right  (* One child, on the right *)
+          | (left, right) ->         (* Two children *)
+              let _, s_key, s_value = min_value_node_and_parent None right in
+              Node (left, s_key, s_value, remove_aux cmp s_key right))
+      | Lt -> Node (remove_aux cmp k left, key, value, right)
+      | Gt -> Node (left, key, value, remove_aux cmp k right)
+
+(* Function to remove a key from the dictionary *)
+let remove k dict =
+  { dict with tree = remove_aux dict.cmp k dict.tree }
