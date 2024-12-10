@@ -1,0 +1,16 @@
+# dune top
+# OCAMLPARAM: unset
+# Shared cache: disabled
+# Shared cache location: /Users/raghid/.cache/dune/db
+# Workspace root: /Users/raghid/Desktop/L3/Fonctionelle/testing/graphes
+# Auto-detected concurrency: 8
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Dev
+#  ; merlin = true
+#  ; fdo_target_exe = None
+#  ; build_dir = In_build_dir "default"
+#  ; instrument_with = []
+#  }
+$ /Users/raghid/.opam/4.12.1/bin/ocamlc.opt -config > /var/folders/8x/thgtbsjs29167n5095mp9n1w0000gn/T/dune_72c877_output

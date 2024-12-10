@@ -92,3 +92,10 @@ let fun_list_of_list (list : 'a list) : ('a fun_list) =
 
 let truncate (list : 'a fun_list) n = 
   fun x -> if (x >= n) then None else list x;;
+
+
+type ('k, 'v) abr = Empty | Node of ('k,'v) abr * 'k * 'v * ('k,'v) abr;;
+
+type comparaison = Lt | Eq | Gt;;
+
+type ('k, 'v) dict = ('k, 'v) abr;;

@@ -1,0 +1,11 @@
+graph g2 {
+n2 [color=black];
+n3 [color=black];
+n4 [color=black];
+n1 [color=black];
+n2 -- n4;
+n1 -- n4;
+n1 -- n3;
+n1 -- n2;
+n2 -- n3;
+}
